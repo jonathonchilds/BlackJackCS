@@ -19,26 +19,27 @@ namespace BlackJackCS
                     deck.Add(card);
                 }
             }
-            foreach (var card in deck)
-            {
-                Console.WriteLine(card);
-            }
-
-
-            // for (var rightIndex = deckLength - 1; rightIndex >= 1; rightIndex--)
-            // {
-            //     var randomNumberGenerator = new Random();
-            //     var leftIndex = randomNumberGenerator.Next(rightIndex);
-
-            //     var leftCard = deck[leftIndex];
-            //     var rightCard = deck[rightIndex];
-            //     deck[rightIndex] = leftCard;
-            //     deck[leftIndex] = rightCard;
             // }
-            // var firstCard = deck[0];
-            // Console.WriteLine(firstCard);
-            // var secondCard = deck[1];
-            // Console.WriteLine(secondCard);
+            // foreach (var card in deck)
+            // {
+            //     Console.WriteLine(card);
+            // }
+            var deckLength = deck.Count;
+
+            for (var rightIndex = deckLength - 1; rightIndex >= 1; rightIndex--)
+            {
+                var randomNumberGenerator = new Random();
+                var leftIndex = randomNumberGenerator.Next(rightIndex);
+
+                var leftCard = deck[leftIndex];
+                var rightCard = deck[rightIndex];
+                deck[rightIndex] = leftCard;
+                deck[leftIndex] = rightCard;
+            }
+            var firstCard = deck[0];
+            Console.WriteLine(firstCard);
+            var secondCard = deck[1];
+            Console.WriteLine(secondCard);
         }
     }
 }

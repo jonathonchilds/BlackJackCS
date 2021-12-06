@@ -19,13 +19,8 @@ namespace BlackJackCS
                     deck.Add(card);
                 }
             }
-            // }
-            // foreach (var card in deck)
-            // {
-            //     Console.WriteLine(card);
-            // }
-            var deckLength = deck.Count;
 
+            var deckLength = deck.Count;
             for (var rightIndex = deckLength - 1; rightIndex >= 1; rightIndex--)
             {
                 var randomNumberGenerator = new Random();
@@ -36,15 +31,52 @@ namespace BlackJackCS
                 deck[rightIndex] = leftCard;
                 deck[leftIndex] = rightCard;
             }
-            var firstCard = deck[0];
-            Console.WriteLine(firstCard);
-            var secondCard = deck[1];
-            Console.WriteLine(secondCard);
+
+            var usersHand = new List<string>();
+            var dealersHand = new List<string>();
+
+            usersHand.Add(deck[0]);
+            usersHand.Add(deck[1]);
+            dealersHand.Add(deck[2]);
+            dealersHand.Add(deck[3]);
+
+
+            foreach (var usersCard in usersHand)
+            {
+                Console.WriteLine($"Your hand is {usersCard}");
+            }
+
+
         }
     }
 }
+// ALGORITHM CHECKLIST
 
+// display playersHand to player
 
+// give player option to "hit"
+//if player hits, extract next card from shuffled list
+// add that card to players hand
+// if total of players hand remains <21, player may hit again
+// if total of players hand >21, automatic loss for player
+
+// if player "stands" 
+// dealer hits until dealers hand >= 17
+// if dealers hand >21, automatic loss for dealer
+
+// if playersHand > dealersHand 
+// then user wins
+
+// if dealersHand >= playersHand 
+// then dealer wins
+
+// prompt option to play again
+
+// if playing again 
+// clear both hands
+// reshuffle deck
+
+// ORIGINAL ALGORITHM 
 
 // shuffle deck of cards & assign to a list
 // assign top two items to playersHand

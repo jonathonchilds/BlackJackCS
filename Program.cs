@@ -7,6 +7,11 @@ namespace BlackJackCS
     {
         public string Face { get; set; }
         public string Suit { get; set; }
+
+        override public string ToString()
+        {
+            return $"The {Face} of {Suit}";
+        }
     }
 
     class Program
@@ -26,11 +31,10 @@ namespace BlackJackCS
                         Suit = suit,
                         Face = face
                     };
-
-                    Console.WriteLine($"The {newCard.Face} of {newCard.Suit}");
-
+                    deck.Add(newCard);
                 }
             }
+
         }
     }
 }

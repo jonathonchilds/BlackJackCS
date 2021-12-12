@@ -3,56 +3,152 @@ using System.Collections.Generic;
 
 namespace BlackJackCS
 {
+    class Card
+    {
+        public string Face { get; set; }
+        public string Suit { get; set; }
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             var cardSuits = new List<string>() { "Spades", "Hearts", "Clubs", "Diamonds" };
-            var cardRanks = new List<string>() { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
-            var deck = new List<string>();
+            var cardFaces = new List<string>() { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
+            var deck = new List<Card>();
 
             foreach (var suit in cardSuits)
             {
-                foreach (var rank in cardRanks)
+                foreach (var face in cardFaces)
                 {
-                    var card = ($"{rank} of {suit}");
-                    deck.Add(card);
+                    var newCard = new Card()
+                    {
+                        Suit = suit,
+                        Face = face
+                    };
+
+                    Console.WriteLine($"The {newCard.Face} of {newCard.Suit}");
+
                 }
             }
-
-            var deckLength = deck.Count;
-            for (var rightIndex = deckLength - 1; rightIndex >= 1; rightIndex--)
-            {
-                var randomNumberGenerator = new Random();
-                var leftIndex = randomNumberGenerator.Next(rightIndex);
-
-                var leftCard = deck[leftIndex];
-                var rightCard = deck[rightIndex];
-                deck[rightIndex] = leftCard;
-                deck[leftIndex] = rightCard;
-            }
-
-            var usersHand = new List<string>();
-            var dealersHand = new List<string>();
-
-            usersHand.Add(deck[0]);
-            usersHand.Add(deck[1]);
-            dealersHand.Add(deck[2]);
-            dealersHand.Add(deck[3]);
-
-
-            foreach (var usersCard in usersHand)
-            {
-                Console.WriteLine($"Your hand is {usersCard}");
-            }
-
-
         }
     }
 }
-// ALGORITHM CHECKLIST
 
-// display playersHand to player
+
+
+
+
+// class Deck
+// {
+//     //   - Properties: A list of 52 cards
+//     public List<Card> Cards { get; set; } = new List<Card>();
+
+//     public Deck()
+//     {
+//         //   - Behavior: Make a new deck of 52 shuffled cards. Deal one card out of the deck.
+//         CreateDeck();
+//         Shuffle();
+//     }
+
+//     public void CreateDeck()
+//     {
+//         // Algorithm B
+//         // - Make a new list of the fours suits
+//         var suits = new List<string>() { "clubs", "diamonds", "hearts", "spades" };
+//         // - Make of a list of 13 ranks and call this list ranks
+//         var ranks = new List<string>() { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+//         // - Make a new list of strings named 'deck'
+//         var deck = new List<string>();
+//         // - Make a loop that goes through all the suits
+//         foreach (var suit in suits)
+//         {
+//             //   Make a loop that goes through all the 'ranks'
+//             //   add newly formed string to the end of the deck list - For Suit = Clubs
+//             foreach (var rank in ranks)
+//             {
+//                 var card = new Card()
+//                 {
+//                     Suit = suit,
+//                     Rank = rank
+//                 };
+//                 Cards.Add(card);
+//             }
+
+//         }
+//         // Console.WriteLine(Cards);
+//     }
+//     public void Shuffle()
+//     {
+
+//         var numberOfCards = Cards.Count;
+//         for (var rightIndex = numberOfCards - 1; rightIndex >= 1; rightIndex--)
+//         {
+//             //   leftIndex = random integer that is greater than or equal to 0 and LESS than rightIndex. See the section "How do we get a random integer"
+//             var randomNumberGenerator = new Random();
+//             var leftIndex = randomNumberGenerator.Next(rightIndex);
+//             // leftIndex = random integer >= 0 and < rightIndex
+//             //   Now swap the values at rightIndex and leftIndex by doing this:
+//             //   leftCard = the value from deck[leftIndex]
+//             var leftCard = Cards[leftIndex];
+//             //   rightCard = the value from deck[rightIndex]
+//             var rightCard = Cards[rightIndex];
+//             //   deck[rightIndex] = leftCard
+//             Cards[rightIndex] = leftCard;
+//             //   deck[leftIndex] = rightCard
+//             Cards[leftIndex] = rightCard;
+//         }
+//     }
+// }
+
+// var deckLength = deck.Count;
+// for (var rightIndex = deckLength - 1; rightIndex >= 1; rightIndex--)
+// {
+//     var randomNumberGenerator = new Random();
+//     var leftIndex = randomNumberGenerator.Next(rightIndex);
+
+//     var leftCard = deck[leftIndex];
+//     var rightCard = deck[rightIndex];
+//     deck[rightIndex] = leftCard;
+//     deck[leftIndex] = rightCard;
+// }
+//         }
+//     }
+
+//     class Program
+// {
+//     static void Main(string[] args)
+//     {
+//         var usersHand = new List<string>();
+//         var dealersHand = new List<string>();
+
+
+//         usersHand.Add(Deck[0]);
+//         usersHand.Add(Deck[1]);
+//         dealersHand.Add(deck[2]);
+//         dealersHand.Add(deck[3]);
+
+
+
+//         Console.WriteLine($"Your hand is {usersHand[0]} and {usersHand[1]}");
+//         Console.WriteLine();
+//         Console.WriteLine("Please type hit if you'd like to hit or stand if you'd like to stand.");
+//         var playersDecision = Console.ReadLine();
+
+//         if (playersDecision == "hit")
+//         {
+//             usersHand.Add(deck[4]);
+//             Console.WriteLine($"Your hand is {usersHand[0]}, {usersHand[1]} and {usersHand[2]}");
+//         }
+
+
+
+
+//     }
+// }
+
+
+// ALGORITHM CHECKLIST
 
 // give player option to "hit"
 //if player hits, extract next card from shuffled list
@@ -196,6 +292,7 @@ namespace BlackJackCS
 //         // 18. If the dealer's hand TotalValue > 21 show "PLAYER WINS"
 //         // 19. If the dealer's hand TotalValue is more than the player's hand TotalValue then show "DEALER WINS", else show "PLAYER WINS"
 //         // 20. If the value of the hands are even, show "DEALER WINS"
+
 //         public class Card
 //         {
 //             public string Suit { get; set; }
@@ -278,8 +375,8 @@ namespace BlackJackCS
 //                 var suits = new List<string>() { "clubs", "diamonds", "hearts", "spades" };
 //                 // - Make of a list of 13 ranks and call this list ranks
 //                 var ranks = new List<string>() { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
-//                 // - Make a new list of strings namer 'deck'
-//                 // var deck = new List<string>();
+//                 // - Make a new list of strings named 'deck'
+//                 var deck = new List<string>();
 //                 // - Make a loop that goes through all the suits
 //                 foreach (var suit in suits)
 //                 {

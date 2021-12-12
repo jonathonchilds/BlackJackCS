@@ -34,6 +34,15 @@ namespace BlackJackCS
                     deck.Add(newCard);
                 }
             }
+            for (var rightIndex = deck.Count - 1; rightIndex > 1; rightIndex--)
+            {
+                var randomNumberGenerator = new Random();
+                var leftIndex = randomNumberGenerator.Next(rightIndex);
+                var leftCard = deck[leftIndex];
+                var rightCard = deck[rightIndex];
+                deck[rightIndex] = leftCard;
+                deck[leftIndex] = rightCard;
+            }
 
         }
     }

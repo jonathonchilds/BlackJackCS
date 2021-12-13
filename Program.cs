@@ -3,6 +3,15 @@ using System.Collections.Generic;
 
 namespace BlackJackCS
 {
+    class Hand
+    {
+        public List<Card> CurrentCards { get; set; } = new List<Card>();
+
+        public void AddCard(Card cardToAdd)
+        {
+            CurrentCards.Add(cardToAdd);
+        }
+    }
     class Card
     {
         public string Face { get; set; }
@@ -43,7 +52,16 @@ namespace BlackJackCS
                 deck[rightIndex] = leftCard;
                 deck[leftIndex] = rightCard;
             }
+            var player = new Hand();
+            var dealer = new Hand();
 
+            var firstPlayerCard = deck[0];
+            deck.Remove(firstPlayerCard);
+            player.AddCard(firstPlayerCard);
+
+            var secondPlayerCard = deck[0];
+            deck.Remove(secondPlayerCard);
+            player.AddCard(secondPlayerCard);
         }
     }
 }
@@ -56,7 +74,6 @@ namespace BlackJackCS
 // {
 //     //   - Properties: A list of 52 cards
 //     public List<Card> Cards { get; set; } = new List<Card>();
-
 //     public Deck()
 //     {
 //         //   - Behavior: Make a new deck of 52 shuffled cards. Deal one card out of the deck.

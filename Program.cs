@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace BlackJackCS
 {
+
     class Hand
     {
         public List<Card> CurrentCards { get; set; } = new List<Card>();
@@ -11,7 +12,20 @@ namespace BlackJackCS
         {
             CurrentCards.Add(cardToAdd);
         }
+
+        public int TotalValue()
+        {
+            var total = 0;
+            foreach (var card in CurrentCards)
+            {
+                total = total + card.Value();
+            }
+
+            return total;
+        }
+
     }
+
     class Card
     {
         public string Face { get; set; }
@@ -43,6 +57,7 @@ namespace BlackJackCS
                     deck.Add(newCard);
                 }
             }
+
             for (var rightIndex = deck.Count - 1; rightIndex > 1; rightIndex--)
             {
                 var randomNumberGenerator = new Random();
@@ -52,16 +67,29 @@ namespace BlackJackCS
                 deck[rightIndex] = leftCard;
                 deck[leftIndex] = rightCard;
             }
+
             var player = new Hand();
             var dealer = new Hand();
 
-            var firstPlayerCard = deck[0];
-            deck.Remove(firstPlayerCard);
-            player.AddCard(firstPlayerCard);
+            for (var numberOfCardsToDeal = 0; numberOfCardsToDeal < 2; numberOfCardsToDeal++)
+            {
+                var card = deck[0];
+                deck.Remove(card);
+                player.AddCard(card);
+            }
 
-            var secondPlayerCard = deck[0];
-            deck.Remove(secondPlayerCard);
-            player.AddCard(secondPlayerCard);
+            for (var numberOfCardsToDeal = 0; numberOfCardsToDeal < 2; numberOfCardsToDeal++)
+            {
+                var card = deck[0];
+                deck.Remove(card);
+                dealer.AddCard(card);
+            }
+
+            Console.WriteLine("You're holding:");
+            Console.WriteLine(String.Join(", ", player.CurrentCards));
+
+            Console.WriteLine($"The total value of your hand is: {player.TotalValue()}");
+
         }
     }
 }

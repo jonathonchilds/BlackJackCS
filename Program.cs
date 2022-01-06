@@ -30,6 +30,7 @@ namespace BlackJackCS
 
         {
             Console.WriteLine();
+            Console.WriteLine();
             Console.Write($"{handName}, your cards are: ");
             Console.WriteLine(String.Join(", ", CurrentCards));
             Console.WriteLine();
@@ -130,12 +131,14 @@ namespace BlackJackCS
 
             var answer = "";
 
-            while (player.TotalValue() <= 21 && answer != "STAND")
+            while (player.TotalValue() < 21 && answer != "STAND")
             {
                 player.PrintCardsAndTotal("Player");
 
                 Console.Write("Do you want to HIT or STAND? ");
                 answer = Console.ReadLine().ToUpper();
+                Console.WriteLine();
+                Console.WriteLine();
 
                 if (answer == "HIT")
                 {
@@ -144,17 +147,48 @@ namespace BlackJackCS
                     player.AddCard(newCard);
                 }
 
-
             }
 
-            // player.PrintCardsAndTotal("Player");
+            player.PrintCardsAndTotal("Player");
 
-            // while (player.TotalValue() <= 21 && dealer.TotalValue() <= 18)
-            //     var newCard = deck[0];
-            //     deck.Remove(newCard);
+            while (player.TotalValue() <= 21 && dealer.TotalValue() <= 17)
+            {
 
-            //     dealer.AddCard(newCard);
-            // }
+
+                var newCard = deck[0];
+                deck.Remove(newCard);
+
+                dealer.AddCard(newCard);
+            }
+
+            dealer.PrintCardsAndTotal("Dealer");
+
+            if (player.TotalValue() > 21)
+            {
+                Console.WriteLine("The DEALER wins!");
+            }
+            else
+            if (dealer.TotalValue() > 21)
+            {
+                Console.WriteLine("YOU win!");
+            }
+            else
+            if (dealer.TotalValue() > player.TotalValue())
+            {
+                Console.WriteLine("The DEALER takes it!");
+            }
+            else
+            if (player.TotalValue() > dealer.TotalValue())
+            {
+                Console.WriteLine("YOU've won!");
+            }
+            else
+            {
+                Console.WriteLine("The DEALER has won.");
+            }
+
+
+
 
         }
     }

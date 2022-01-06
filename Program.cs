@@ -83,7 +83,7 @@ namespace BlackJackCS
 
     class Program
     {
-        static void Main(string[] args)
+        static void PlayTheGame()
         {
             var cardSuits = new List<string>() { "Spades", "Hearts", "Clubs", "Diamonds" };
             var cardFaces = new List<string>() { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
@@ -189,7 +189,24 @@ namespace BlackJackCS
 
 
 
+        }
 
+        static void Main(string[] args)
+        {
+            while (true)
+            {
+                PlayTheGame();
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.Write("Would you like to play again? ");
+                var answer = Console.ReadLine().ToUpper();
+
+                if (answer == "NO")
+                {
+                    break;
+                }
+            }
         }
     }
 }
